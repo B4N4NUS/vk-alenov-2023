@@ -1,3 +1,308 @@
+:root {
+  --background-color: #333333;
+  --background-form-color: #4B4B4B;
+  --interactive: #575757;
+  --interactiveField: #808080;
+
+  --highlight: #52BFFD;
+  --text: #FFFFFF;
+  --textBlank: #B7B7B7;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: var(--background-color);
+  border-radius: 100px;
+  border-inline: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-button {
+  width: 20px; 
+  height: 20px; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: var(--highlight);
+  border-radius: 100px;
+}
+
+/* Handle on hover
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--highlight);
+} */
+
+
+.mainContainer {
+  width: calc(100vw - 4px);
+  height: calc(100vh - 4px);
+  min-width: 400px;
+  min-height: 400px;
+  background-color: var(--background-color);
+  flex-direction: column;
+  outline: 2px solid var(--background-color);
+  margin: 2px;
+  overflow: hidden;
+}
+
+.formButtonClosed {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 60px;
+  min-width: 300px;
+  height: 60px;
+  width: 300px;
+  border-radius: 20px;
+  background-color: var(--background-form-color);
+  outline: 2px solid var(--background-form-color);
+  color: var(--text);
+  transition: outline 0.3s, width 0.3s, height 0.3s;
+  z-index: 2;
+}
+
+.formButtonClosed:hover {
+  outline: 2px solid var(--highlight);
+}
+
+.formButtonOpen {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 80px;
+  min-width: 440px;
+  height: 85vh;
+  width: 65vw;
+  border-radius: 20px;
+  color: var(--text);
+  background-color: var(--background-form-color);
+  outline: 2px solid var(--background-form-color);
+  transition: outline 0.3s, width 0.3s, height 0.3s;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.formContainer {
+  /* margin-inline: 3vw; */
+  margin-block: 4vh;
+  overflow: hidden;
+}
+
+.formIntarectableContainer {
+  margin-inline: 2vw;
+  margin-block-start: 8px;
+  overflow: auto;
+  max-height: 70vh;
+  /* overflow: hidden; */
+}
+
+.formButtonContainer {
+  height: 100%;
+  width: 100%;
+  display: table;
+}
+
+@media (pointer: coarse) {
+  /* mobile */
+}
+
+@media (pointer: fine),
+(pointer: none) {
+  /* desktop */
+}
+
+@media (pointer: fine) and (any-pointer: coarse) {
+  /* touch desktop */
+}
+
+.formHeader {
+  margin-inline: 4vw;
+  font-size: 24px;
+  font-weight: 600;
+  display: inline;
+  flex: 0;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--highlight);
+  transition: font-size 0.3s, ;
+  user-select: none;
+}
+
+
+
+.formButtonHeader {
+  font-size: 18px;
+  /* font-weight: 600; */
+  /* height: 100%;
+  width: 100%; */
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+  vertical-align: middle;
+  display: table-cell;
+  padding: 10px;
+  user-select: none;
+  border-bottom: 0px solid var(--background-form-color);
+  transition: font-size 0.3s, border-bottom cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
+}
+
+.autograph {
+  position: absolute;
+  white-space: pre;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  text-align: center;
+  padding: 10px;
+  color: var(--text);
+}
+
+.agVisible {
+  opacity: 100%;
+  transition: opacity 3s;
+}
+
+.agHidden {
+  opacity: 0%;
+  transition: opacity 0.5s;
+}
+
+
+.formField {
+  margin-inline: 2vw;
+  position: relative;
+  font-size: 18px;
+  height: auto;
+  /* max-height: 60px; */
+  width: auto;
+  border-radius: 20px;
+  background-color: var(--interactive);
+  margin-block: 20px;
+  padding-inline: 30px;
+  overflow: hidden;
+  z-index: 3;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  outline: 2px solid var(--background-form-color);
+  transition: outline 0.3s, background-color 0.3s, height 0.3s;
+}
+
+.translate {
+  transition: height 0.3s;
+}
+
+.formField:hover {
+  outline: 2px solid var(--highlight);
+}
+
+.formFieldSelected {
+  margin-inline: 2vw;
+  position: relative;
+  font-size: 18px;
+  height: auto;
+  /* max-height: 1000px; */
+  /* height: 60px; */
+  width: auto;
+  border-radius: 20px;
+  background-color: var(--interactiveField);
+  margin-block: 20px;
+  padding-inline: 30px;
+  /* overflow: hidden; */
+  z-index: 3;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  outline: 2px solid var(--background-form-color);
+  transition: background-color 0.3s, width 0.3s, height 0.3s;
+  
+}
+
+.formFieldSelectedHeader {
+  /* padding-inline: 30px; */
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  /* left:0px; */
+  height: 60px;
+  width: 100%;
+
+  /* background-color: var(--interactiveField); */
+ 
+}
+
+
+.formText {
+  color: var(--text);
+}
+
+.formTextBlank {
+  color: var(--textBlank);
+}
+
+.iconTriangle {
+  position: absolute;
+  right: 20px;
+  width: 15px;
+  z-index: 4;
+  top:30px;
+  transition: transform 0.3s;
+
+}
+
+#triangle {
+  fill: var(--highlight)
+}
+
+.formFieldItem {
+  height: 30px;
+  width: auto;
+  min-width: 40px;
+  border-radius: 10px;
+  margin-block: 2px;
+  padding-inline: 10px;
+  padding-block: 6px;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  user-select: none;
+  background-color: transparent;
+  transition: background-color 0.5s, color 0.5s;
+  /* padding:10px; */
+}
+
+.formFieldItemSelected, .formFieldItem:hover {
+  height: 30px;
+  width: auto;
+  min-width: 40px;
+  border-radius: 10px;
+  margin-block: 2px;
+  padding-inline: 10px;
+  padding-block: 6px;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  user-select: none;
+  background-color: var(--highlight);
+  color: var(--background-form-color);
+  /* font-weight: 500; */
+  user-select: none;
+  transition: background-color 0.5s, color 0.5s;
+} 
+
+
+
+/* 
 .App {
   text-align: center;
 }
@@ -35,4 +340,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
