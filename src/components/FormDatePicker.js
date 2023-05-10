@@ -54,7 +54,6 @@ export default function FormDatePicker({
 
     useEffect(() => {
         if (gridRef.current) {
-            console.log(gridRef.current.offsetHeight + 70)
             setHeight(gridRef.current.offsetHeight + 70)
         }
     }, [variants, spin])

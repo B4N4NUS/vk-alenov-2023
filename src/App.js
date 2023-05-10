@@ -98,7 +98,6 @@ function App() {
   }
 
   const changeDuration = (time) => {
-    console.log(time)
     setUserSelection({ ...userSelection, duration: time })
   }
 
