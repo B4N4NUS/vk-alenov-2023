@@ -7,40 +7,32 @@
   --highlight: #52BFFD;
   --text: #FFFFFF;
   --textBlank: #B7B7B7;
+  --error: #C55555;
 }
 
-
-/* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
+  height: 6px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background-color: var(--background-color);
+  background-color: transparent;
   border-radius: 100px;
   border-inline: 2px solid transparent;
   background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-button {
-  width: 20px; 
-  height: 20px; 
+  width: 20px;
+  height: 20px;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background-color: var(--highlight);
   border-radius: 100px;
 }
-
-/* Handle on hover
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--highlight);
-} */
-
 
 .mainContainer {
   width: calc(100vw - 4px);
@@ -52,6 +44,7 @@
   outline: 2px solid var(--background-color);
   margin: 2px;
   overflow: hidden;
+  transition: outline 0.6s;
 }
 
 .formButtonClosed {
@@ -94,17 +87,18 @@
 }
 
 .formContainer {
-  /* margin-inline: 3vw; */
   margin-block: 4vh;
   overflow: hidden;
+  position: relative;
 }
 
 .formIntarectableContainer {
   margin-inline: 2vw;
   margin-block-start: 8px;
-  overflow: auto;
-  max-height: 70vh;
-  /* overflow: hidden; */
+  max-height: 74vh;
+  min-height: 74vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .formButtonContainer {
@@ -114,12 +108,75 @@
 }
 
 @media (pointer: coarse) {
-  /* mobile */
+
+  #icon {
+    stroke: var(--highlight);
+  }
+
+  #previewIcon {
+    stroke: var(--background-form-color);
+  }
+
+  .formButton {
+    height: 30px;
+    width: 160px;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--background-form-color);
+    background-color: var(--highlight);
+    padding-inline: 20px;
+    padding-block: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex: 0;
+    user-select: none;
+    cursor: pointer;
+    z-index: 4;
+    transition: width 0.3s, background-color 0.3s, opacity 0.2s, color 0.2s;
+  }
+
+  .formButton:hover {
+    width: 160px;
+
+
+    transition: width 0.3s, background-color 0.3s, opacity 0.2s, color 0.6s;
+  }
 }
 
 @media (pointer: fine),
 (pointer: none) {
-  /* desktop */
+  #icon {
+    stroke: var(--background-form-color);
+  }
+
+  #previewIcon {
+    stroke: var(--highlight);
+  }
+
+  .formButton {
+    height: 30px;
+    width: 30px;
+    font-size: 24px;
+    font-weight: 500;
+    color: transparent;
+    background-color: transparent;
+    padding-inline: 20px;
+    padding-block: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex: 0;
+    user-select: none;
+    cursor: pointer;
+    z-index: 4;
+    transition: width 0.3s, background-color 0.3s, opacity 0.2s, color 0.2s;
+  }
+
+  .formButton:hover {
+    width: 160px;
+    background-color: var(--highlight);
+    color: var(--background-form-color);
+    transition: width 0.3s, background-color 0.3s, opacity 0.2s, color 0.6s;
+  }
 }
 
 @media (pointer: fine) and (any-pointer: coarse) {
@@ -138,13 +195,8 @@
   user-select: none;
 }
 
-
-
 .formButtonHeader {
   font-size: 18px;
-  /* font-weight: 600; */
-  /* height: 100%;
-  width: 100%; */
   text-align: center;
   justify-self: center;
   align-self: center;
@@ -183,7 +235,7 @@
   position: relative;
   font-size: 18px;
   height: auto;
-  /* max-height: 60px; */
+  flex: 1;
   width: auto;
   border-radius: 20px;
   background-color: var(--interactive);
@@ -196,6 +248,82 @@
   display: flex;
   outline: 2px solid var(--background-form-color);
   transition: outline 0.3s, background-color 0.3s, height 0.3s;
+}
+
+.formFieldComment {
+  margin-inline: 2vw;
+  position: relative;
+  font-size: 18px;
+  height: auto;
+  width: auto;
+  border-radius: 20px;
+  background-color: var(--interactive);
+  margin-block: 20px;
+  padding-inline: 30px;
+  overflow: hidden;
+  z-index: 3;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  word-wrap: break-word;
+  outline: 2px solid var(--background-form-color);
+  transition: outline 0.3s, background-color 0.3s, height 0.3s;
+}
+
+.formFieldComment:hover {
+  outline: 2px solid var(--highlight);
+  transition: outline 0.3s, background-color 0.3s, height 0.3s;
+}
+
+.formFieldInput,
+.formFieldInput:hover {
+  background-color: transparent;
+  color: var(--text);
+  min-height: 200px;
+  max-width: 50vw;
+  font-size: 18px;
+  padding-block: 18px;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  resize: none;
+  font-family: inherit;
+}
+
+.growWrap {
+  display: grid;
+}
+
+.growWrap::after {
+  content: attr(data-replicated-value);
+  white-space: pre-wrap;
+  visibility: hidden;
+}
+
+.growWrap>.formFieldInput {
+  resize: none;
+  overflow: hidden;
+}
+
+.growWrap>.formFieldInput,
+.growWrap::after {
+  background-color: transparent;
+  color: var(--text);
+  min-height: 200px;
+  max-width: 50vw;
+  font-size: 18px;
+  padding-block: 18px;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  resize: none;
+  font-family: inherit;
+
+  grid-area: 1/1/2/2;
+}
+
+.formFieldInput::placeholder {
+  color: var(--textBlank)
 }
 
 .translate {
@@ -211,43 +339,36 @@
   position: relative;
   font-size: 18px;
   height: auto;
-  /* max-height: 1000px; */
-  /* height: 60px; */
   width: auto;
   border-radius: 20px;
   background-color: var(--interactiveField);
   margin-block: 20px;
   padding-inline: 30px;
-  /* overflow: hidden; */
+  flex: 1;
   z-index: 3;
   flex-direction: column;
   justify-content: center;
   display: flex;
   outline: 2px solid var(--background-form-color);
   transition: background-color 0.3s, width 0.3s, height 0.3s;
-  
 }
 
 .formFieldSelectedHeader {
-  /* padding-inline: 30px; */
   flex-direction: column;
   justify-content: center;
   display: flex;
-  /* left:0px; */
   height: 60px;
   width: 100%;
-
-  /* background-color: var(--interactiveField); */
- 
 }
-
 
 .formText {
   color: var(--text);
+  transition: color 0.3s;
 }
 
 .formTextBlank {
   color: var(--textBlank);
+  transition: color 0.3s;
 }
 
 .iconTriangle {
@@ -255,9 +376,8 @@
   right: 20px;
   width: 15px;
   z-index: 4;
-  top:30px;
+  top: 30px;
   transition: transform 0.3s;
-
 }
 
 #triangle {
@@ -278,10 +398,27 @@
   user-select: none;
   background-color: transparent;
   transition: background-color 0.5s, color 0.5s;
-  /* padding:10px; */
 }
 
-.formFieldItemSelected, .formFieldItem:hover {
+.formFieldItemGrid {
+  height: 30px;
+  width: auto;
+  min-width: 40px;
+  border-radius: 10px;
+  margin-block: 2px;
+  padding-inline: 10px;
+  padding-block: 6px;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  user-select: none;
+  background-color: transparent;
+  transition: background-color 0.5s, color 0.5s;
+  text-align: center;
+}
+
+.formFieldItemGridSelected,
+.formFieldItemGrid:hover {
   height: 30px;
   width: auto;
   min-width: 40px;
@@ -295,49 +432,172 @@
   user-select: none;
   background-color: var(--highlight);
   color: var(--background-form-color);
-  /* font-weight: 500; */
   user-select: none;
   transition: background-color 0.5s, color 0.5s;
-} 
-
-
-
-/* 
-.App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
+.formFieldItemDayGrid {
+  border-radius: 10px;
+  margin-block: 2px;
+  padding-inline: 10px;
+  padding-block: 6px;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  display: flex;
+  user-select: none;
+  background-color: transparent;
+  transition: background-color 0.5s, color 0.5s;
+  text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+.formFieldItemDayGridSelected,
+.formFieldItemDayGrid:hover {
+  border-radius: 10px;
+  margin-block: 2px;
+  padding-inline: 10px;
+  padding-block: 6px;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  user-select: none;
+  background-color: var(--highlight);
+  color: var(--background-form-color);
+  user-select: none;
+  transition: background-color 0.5s, color 0.5s;
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.formDayName {
+  color: var(--highlight);
+  text-align: center;
+  user-select: none;
+}
+
+.formFieldGridWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  grid-column-gap: 6px;
+  grid-row-gap: 6px;
+}
+
+.formFieldDayWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 6px;
+  grid-row-gap: 6px;
+}
+
+.box {
+  background: grey;
+  padding: 20px 20px 20px 20px;
+}
+
+.formFieldItemSelected,
+.formFieldItem:hover {
+  height: 30px;
+  width: auto;
+  min-width: 40px;
+  border-radius: 10px;
+  margin-block: 2px;
+  padding-inline: 10px;
+  padding-block: 6px;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  user-select: none;
+  background-color: var(--highlight);
+  color: var(--background-form-color);
+  user-select: none;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.formButtonWrapper {
+  display: flex;
+  flex-direction: row;
+  margin-inline: 4vw;
+  position: absolute;
+  min-width: 400px;
+  width: 56vw;
+  bottom: 0px;
+  height: 80px;
+  z-index: 10;
+}
+
+
+
+.formErrorText {
+  color: var(--error);
+  user-select: none;
+  transition: color 0.3s;
+}
+
+.formFieldError,
+.formFieldError:hover {
+  outline: 2px solid var(--error);
+  transition: outline 1s;
+}
+
+.highlightEdge {
+  outline: 2px solid var(--highlight);
+  transition: outline 0.6s;
+}
+
+.highlightEdgeError {
+  outline: 2px solid var(--error);
+  transition: outline 0.6s;
+}
+
+.formLRSelectorWrapper {
+  display: flex;
+  padding-bottom: 10px;
+}
+
+.formLRText {
+  min-width: 80px;
+  text-align: center;
+  user-select: none;
+}
+
+.formButtonInterClose {
+  padding-inline: 20px;
+  padding-block: 15px;
+}
+
+#lrArrow {
+  stroke: var(--highlight);
+}
+
+
+.formTimeWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.formTimeInput {
+  width: 40px;
+  height: 40px;
+  font-family: inherit;
+  text-align: center;
+  font-size: 24px;
+  color: var(--text);
+  border: none;
+  outline: none;
+  flex: 1;
+  background-color: transparent;
+  border-bottom: 2px solid var(--highlight)
+}
+
+.formTimeInputSelected {
+  width: 40px;
+  height: 40px;
+  font-family: inherit;
+  text-align: center;
+  font-size: 24px;
+  color: var(--interactiveField);
+
+  border: none;
+  outline: none;
+  flex: 1;
+  background-color: var(--highlight);
+}
